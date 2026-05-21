@@ -10,51 +10,31 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun GridLazyColumn(paddingValues: PaddingValues){
+fun GridLazyColumn(paddingValues: PaddingValues) {
+
     LazyColumn(
         modifier = Modifier
-                            .padding(paddingValues)
-                            .fillMaxSize(),
+            .padding(paddingValues)
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
-        item{
-            Text(
-                text = "Categorie",
-                modifier = Modifier.padding(start =  12.dp, top = 16.dp)
+        item {
+            GridPageVertical(
+
             )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-        item{
-            GridRow(products = listOf("Vetements","Chaussures","Accesoires","Electroniques","Gaming"))
-        }
-        item {
-            Text(
-                text = "Produits Populaires",
-                modifier = Modifier.padding(start =  12.dp, top = 16.dp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-        item {
-            GridPageVertical(products = listOf("Chaussures Jordan","Frigo","Telephone","montre",
-                "cafetiare","OrdinateurHP"))
-        }
-
-        item {
-            Text(
-                text = "Nouveautes",
-                modifier = Modifier.padding(start =  12.dp, top = 16.dp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-        item {
-            GridPageVertical(products = listOf("Ordinateur MacBook","Jordan19","Television",
-                "Telephones"))
         }
     }
+}
+
+@Composable
+fun SectionTitle(title: String) {
+    Text(
+        text = title,
+        fontWeight = FontWeight.Bold,
+        modifier = Modifier.padding(start = 12.dp, top = 16.dp, bottom = 8.dp)
+    )
 }

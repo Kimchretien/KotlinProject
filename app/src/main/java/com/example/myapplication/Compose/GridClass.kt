@@ -10,12 +10,33 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.Card.ProductCard
+import com.example.myapplication.Card.ProduitCard
+import com.example.myapplication.R
+import com.example.myapplication.modele.Producty
 
 @Composable
-fun GridPageVertical(products :List<String>) {
+fun GridPageVertical() {
 
     Column {
+
+        val products = listOf(
+
+            Producty(
+                "$120",
+                R.drawable.jordanshoes
+            ),
+
+            Producty(
+                "$500",
+                R.drawable.smartphone
+            ),
+
+            Producty(
+                "$900",
+                R.drawable.laptop
+            )
+
+        )
 
         products.chunked(2).forEach { rows ->
 
@@ -25,7 +46,7 @@ fun GridPageVertical(products :List<String>) {
             ) {
                 rows.forEach { product ->
                     Box(modifier = Modifier.weight(1f)) {
-                        ProductCard(product)
+                        ProduitCard(product)
                     }
                     }
                 }
