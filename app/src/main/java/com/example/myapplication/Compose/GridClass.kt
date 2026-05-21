@@ -17,27 +17,39 @@ import com.example.myapplication.modele.Producty
 @Composable
 fun GridPageVertical() {
 
-    Column {
+    val products = listOf(
 
-        val products = listOf(
+        Producty(
+            120,
+            R.drawable.jordanshoes,
+        ),
 
-            Producty(
-                "$120",
-                R.drawable.jordanshoes
-            ),
+        Producty(
+            500,
+            R.drawable.smartphone,
+        ),
 
-            Producty(
-                "$500",
-                R.drawable.smartphone
-            ),
+        Producty(
+            900,
+            R.drawable.laptop,
+        ),
 
-            Producty(
-                "$900",
-                R.drawable.laptop
-            )
-
+        Producty(
+            9000,
+            R.drawable.watch,
+        ),
+        Producty(
+            700,
+            R.drawable.coffeemaker,
+        ),
+        Producty(
+            6000,
+            R.drawable.refrigerator,
         )
 
+    )
+
+    Column {
         products.chunked(2).forEach { rows ->
 
         Row(

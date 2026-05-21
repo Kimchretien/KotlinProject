@@ -142,9 +142,8 @@ fun  HomePage(navController: NavController) {
                     .height(55.dp)
                     .padding(horizontal = 20.dp)
             )
-           // Spacer(modifier = Modifier.height(10.dp))
 
-            GridLazyColumn(paddingValues)
+            GridLazyColumn()
         }
 
     }
