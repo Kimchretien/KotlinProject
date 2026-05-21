@@ -7,18 +7,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.modele.Producty
 
 @Composable
-fun GridLazyColumn() {
+fun GridLazyColumn(onAddToCart: (Producty) -> Unit,onShowMessage: (String) -> Unit) {
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            GridPageVertical(
-
-            )
+            GridPageVertical(onAddToCart = onAddToCart, onShowMessage =onShowMessage )
         }
     }
 }

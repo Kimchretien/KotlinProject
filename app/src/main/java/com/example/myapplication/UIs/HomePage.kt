@@ -22,6 +22,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
@@ -29,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,14 +43,28 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.myapplication.Compose.GridLazyColumn
+import com.example.myapplication.modele.Producty
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun  HomePage(navController: NavController) {
 
     var rechercher by remember { mutableStateOf("") }
+    val cart = remember {
+        mutableStateOf<List<Producty>>(emptyList())
+    }
+    val total = cart.value.sumOf { it.price }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
+    fun showMessage(message: String) {
+        scope.launch {
+            snackbarHostState.showSnackbar(message)
+        }
+    }
     Scaffold(
+            snackbarHost = { SnackbarHost(snackbarHostState) },
 
         topBar = {
 
@@ -93,7 +110,7 @@ fun  HomePage(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
-                    Text(text = "0 BIF", fontWeight = FontWeight.ExtraBold,
+                    Text(text = "$total BIF", fontWeight = FontWeight.ExtraBold,
                         fontFamily = FontFamily.Serif, fontSize = 28.sp)
 
                     Spacer(modifier = Modifier.weight(1f))
@@ -143,7 +160,13 @@ fun  HomePage(navController: NavController) {
                     .padding(horizontal = 20.dp)
             )
 
-            GridLazyColumn()
+            GridLazyColumn(
+                onAddToCart = { product ->
+                    cart.value = cart.value + product
+                },   onShowMessage = { message ->
+                    showMessage(message)
+                }
+            )
         }
 
     }

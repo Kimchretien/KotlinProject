@@ -15,37 +15,81 @@ import com.example.myapplication.R
 import com.example.myapplication.modele.Producty
 
 @Composable
-fun GridPageVertical() {
+fun GridPageVertical(
+    onAddToCart: (Producty) -> Unit,
+    onShowMessage: (String) -> Unit
+) {
 
     val products = listOf(
 
         Producty(
             120,
             R.drawable.jordanshoes,
+            1
         ),
 
         Producty(
             500,
             R.drawable.smartphone,
+            9
         ),
 
         Producty(
             900,
             R.drawable.laptop,
+            9
         ),
 
         Producty(
             9000,
             R.drawable.watch,
+            8
         ),
         Producty(
             700,
             R.drawable.coffeemaker,
+            3
         ),
         Producty(
             6000,
             R.drawable.refrigerator,
+            3
+        ),
+        Producty(
+            120,
+            R.drawable.jordanshoes,
+            3
+        ),
+
+        Producty(
+            500,
+            R.drawable.smartphone,
+            4
+
+        ),
+
+        Producty(
+            900,
+            R.drawable.laptop,
+            4
+        ),
+
+        Producty(
+            9000,
+            R.drawable.watch,
+            1
+        ),
+        Producty(
+            700,
+            R.drawable.coffeemaker,
+            1
+        ),
+        Producty(
+            6000,
+            R.drawable.refrigerator,
+            3
         )
+
 
     )
 
@@ -58,7 +102,11 @@ fun GridPageVertical() {
             ) {
                 rows.forEach { product ->
                     Box(modifier = Modifier.weight(1f)) {
-                        ProduitCard(product)
+                        ProduitCard(
+                            producty = product,
+                            onAddToCart = onAddToCart,
+                            onShowMessage=onShowMessage
+                        )
                     }
                     }
                 }

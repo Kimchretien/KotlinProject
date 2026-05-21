@@ -29,7 +29,11 @@ import androidx.compose.ui.unit.sp
 import com.example.myapplication.modele.Producty
 
 @Composable
-fun ProduitCard(producty: Producty) {
+fun ProduitCard(
+    producty: Producty,
+    onAddToCart: (Producty) -> Unit,
+    onShowMessage: (String) -> Unit
+) {
 
     Card(
         modifier = Modifier
@@ -74,7 +78,15 @@ fun ProduitCard(producty: Producty) {
                 )
 
                 IconButton(
-                    onClick = {},
+                    onClick = {
+                        if(producty.nombre>0){
+                            producty.nombre--
+                        } else{
+                            onShowMessage("Stock épuisé ❌")
+                            return@IconButton
+                        }
+                        onAddToCart(producty)
+                    },
                     modifier = Modifier.align(Alignment.BottomEnd)
                 ) {
 
