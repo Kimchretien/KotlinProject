@@ -21,9 +21,6 @@ class MainActivity : ComponentActivity() {
                 navController = navController,
                 startDestination = "home"
             ) {
-                composable("login") {
-                    LoginScreen(navController)
-                }
 
                 composable("home") {
                     HomePage()

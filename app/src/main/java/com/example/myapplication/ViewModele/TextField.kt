@@ -1,4 +1,4 @@
-package com.example.myapplication.Card
+package com.example.myapplication.ViewModele
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,73 +26,89 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 @Composable
-fun TextField(){
-    var rechercher by remember { mutableStateOf("") }
-    var expanded =remember { mutableStateOf(false) }
+fun SearchBarWithMenu(
+    selectedFilter: String,
+    onFilterChange: (String) -> Unit
+) {
 
+    var rechercher by remember { mutableStateOf("") }
+    var expanded by remember { mutableStateOf(false) }
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
-    ){
+    ) {
+
         OutlinedTextField(
             value = rechercher,
-            onValueChange = {
-                rechercher = it
-            },
+            onValueChange = { rechercher = it },
             placeholder = {
                 Row {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search"
-                    )
+                    Icon(Icons.Default.Search, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("Champ de recherche")
                 }
-
             },
             modifier = Modifier
                 .weight(1f)
                 .height(55.dp)
         )
-        IconButton(onClick = { expanded.value= true }) {
-            Icon(
-                imageVector = Icons.Default.MoreHoriz,
-                contentDescription = "More Filtres"
-            )
+
+        IconButton(onClick = { expanded = true }) {
+            Icon(Icons.Default.MoreHoriz, contentDescription = null)
         }
 
         DropdownMenu(
-
-            expanded = expanded.value,
-            onDismissRequest = { expanded.value= false },
-            offset = DpOffset(x = 250.dp, y = 0.dp)
+            expanded = expanded,
+            onDismissRequest = { expanded = false } ,
+            offset = DpOffset(x = 230.dp, y = 0.dp)
         ) {
-            menuItem("Toutes")
-            menuItem("Chaussures")
-            menuItem("Vetements")
-            menuItem("Electroniques")
-            menuItem("Accessoires")
-            menuItem("Gaming")
-            menuItem("Livres")
+
+            MenuItem("Toutes", selectedFilter, onFilterChange) {
+                expanded = false
+            }
+
+            MenuItem("Chaussures", selectedFilter, onFilterChange) {
+                expanded = false
+            }
+
+            MenuItem("vetements", selectedFilter, onFilterChange) {
+                expanded = false
+            }
+
+            MenuItem("Electroniques", selectedFilter, onFilterChange) {
+                expanded = false
+            }
+
+             MenuItem("gaming", selectedFilter, onFilterChange) {
+                    expanded = false
+                }
+
+
         }
     }
 }
 @Composable
-fun menuItem(title: String) {
-    var selectedItem by remember { mutableStateOf("") }
-    var expanded by remember { mutableStateOf(false) }
+fun MenuItem(
+    title: String,
+    selectedFilter: String,
+    onFilterChange: (String) -> Unit,
+    onClose: () -> Unit
+) {
+
     DropdownMenuItem(
         text = {
             Text(
-                title
+                title,
+                color = if (selectedFilter == title) Color(0xFF1C69C0)
+                else Color.Black
             )
         },
         onClick = {
-            selectedItem = title
-            expanded = false
+            onFilterChange(title)
+            onClose()
         }
     )
 }

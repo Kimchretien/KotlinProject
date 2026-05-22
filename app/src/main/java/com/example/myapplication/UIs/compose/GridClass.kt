@@ -1,4 +1,4 @@
-package com.example.myapplication.Compose
+package com.example.myapplication.UIs.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.Card.ProduitCard
 import com.example.myapplication.R
 import com.example.myapplication.modele.Producty
 
@@ -70,11 +69,11 @@ fun GridPageVertical(
             "Accessoires"
         ),
         Producty(
-            "jordan 19",
+            "samba",
             120,
-            R.drawable.jordanshoes,
-            3,
-            "Accessoires"
+            R.drawable.samba,
+            8,
+            "Chaussures"
         ),
 
         Producty(

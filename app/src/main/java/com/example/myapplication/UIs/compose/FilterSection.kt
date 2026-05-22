@@ -1,4 +1,4 @@
-package com.example.myapplication.Card
+package com.example.myapplication.UIs.compose
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement

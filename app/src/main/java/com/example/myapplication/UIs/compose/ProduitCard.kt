@@ -1,4 +1,4 @@
-package com.example.myapplication.Card
+package com.example.myapplication.UIs.compose
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
@@ -94,7 +93,7 @@ fun ProduitCard(
                         }
                         onAddToCart(producty)
                     },
-                    modifier = Modifier.align(Alignment.BottomEnd).offset(y = 8.dp)
+                    modifier = Modifier.align(Alignment.BottomEnd).offset(y = 10.dp)
                 ) {
 
                     Icon(

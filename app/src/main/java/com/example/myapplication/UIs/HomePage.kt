@@ -36,10 +36,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.myapplication.Card.FilterSection
-import com.example.myapplication.Card.TextField
-import com.example.myapplication.Compose.GridLazyColumn
+import com.example.myapplication.UIs.compose.FilterSection
+import com.example.myapplication.UIs.compose.GridLazyColumn
+import com.example.myapplication.ViewModele.SearchBarWithMenu
 import com.example.myapplication.modele.Producty
 import kotlinx.coroutines.launch
 
@@ -134,7 +133,8 @@ fun  HomePage() {
 
         ) {
             Spacer(modifier = Modifier.height(20.dp))
-            TextField()
+            SearchBarWithMenu(selectedFilter = selectedFilter.value,
+                onFilterChange = {selectedFilter.value=it})
             Spacer(modifier = Modifier.height(20.dp))
             FilterSection(
                 selectedFilter = selectedFilter.value,
