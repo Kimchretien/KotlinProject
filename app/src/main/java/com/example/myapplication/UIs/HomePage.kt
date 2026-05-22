@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.myapplication.Card.FilterSection
+import com.example.myapplication.Card.TextField
 import com.example.myapplication.Compose.GridLazyColumn
 import com.example.myapplication.modele.Producty
 import kotlinx.coroutines.launch
@@ -53,7 +54,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun  HomePage(navController: NavController) {
 
-    var rechercher by remember { mutableStateOf("") }
+
     val cart = remember {
         mutableStateOf<List<Producty>>(emptyList())
     }
@@ -138,40 +139,10 @@ fun  HomePage(navController: NavController) {
 
 
         ) {
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            OutlinedTextField(
-                value = rechercher,
-                onValueChange = {
-                    rechercher = it
-                },
-                placeholder = {
-                    Row {
-                        Icon(
-                            imageVector =Icons.Default.Search,
-                            contentDescription = "Search"
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text("Champ de recherche")
-                    }
-
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(55.dp)
-            )
             Spacer(modifier = Modifier.height(20.dp))
-            //Row {
+            TextField()
+            Spacer(modifier = Modifier.height(20.dp))
                 FilterSection()
-//                Spacer(modifier = Modifier.width(8.dp))
-//                IconButton(onClick = {}) {
-//                    Icon(
-//                        imageVector = Icons.Default.MoreVert,
-//                        contentDescription = "Plus de filtres"
-//                    )
-//                }
-           // }
             GridLazyColumn(
                 onAddToCart = { product ->
                     cart.value = cart.value + product

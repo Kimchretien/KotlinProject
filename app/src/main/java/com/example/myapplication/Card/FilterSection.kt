@@ -6,14 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.mutableStateOf
@@ -25,15 +19,13 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun FilterSection() {
-    var expanded =remember { mutableStateOf(false) }
-
+    var selectedFilter=remember { mutableStateOf("Chaussures") }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         Row(
             modifier = Modifier
                 .weight(1f)
@@ -43,48 +35,43 @@ fun FilterSection() {
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Filterchip("Chaussures")
-            Filterchip("Vetements")
-            Filterchip("Electronique")
+            Filterchip(
+                name = "Chaussures",
+                selected = selectedFilter.value== "Chaussures",
+                onClick = { selectedFilter.value= "Chaussures" }
+            )
+
+            Filterchip(
+                name = "Vetements",
+                selected = selectedFilter.value== "Vetements",
+                onClick = { selectedFilter.value= "Vetements" }
+            )
+
+            Filterchip(
+                name = "Electronique",
+                selected = selectedFilter.value== "Electronique",
+                onClick = { selectedFilter.value= "Electronique" }
+            )
         }
 
-        IconButton(onClick = { expanded.value= true }) {
-            Icon(
-                imageVector = Icons.Default.MoreVert,
-                contentDescription = "More Filtres"
-            )
-        }
 
-        DropdownMenu(
-            expanded = expanded.value,
-            onDismissRequest = { expanded.value= false }
-        ) {
-            DropdownMenuItem(
-                text = { Text("Chaussures") },
-                onClick = { expanded.value= false }
-            )
-            DropdownMenuItem(
-                text = { Text("Vêtements") },
-                onClick = { expanded.value= false }
-            )
-            DropdownMenuItem(
-                text = { Text("Accessoires") },
-                onClick = { expanded.value= false }
-            )
-        }
     }
 }
 
 @Composable
-fun Filterchip(name: String) {
+fun Filterchip(
+    name: String,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
     FilterChip(
-        selected = true,
-        onClick = {},
+        selected = selected,
+        onClick = onClick,
         label = { Text(name) },
         colors = FilterChipDefaults.filterChipColors(
             selectedContainerColor = Color(0XFF1C69C0),
             selectedLabelColor = Color.White,
-            containerColor = Color.LightGray,
+            containerColor = Color.Transparent,
             labelColor = Color.Black
         )
     )
