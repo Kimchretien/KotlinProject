@@ -42,6 +42,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.myapplication.Card.FilterSection
 import com.example.myapplication.Compose.GridLazyColumn
 import com.example.myapplication.modele.Producty
 import kotlinx.coroutines.launch
@@ -159,7 +160,9 @@ fun  HomePage(navController: NavController) {
                     .height(55.dp)
                     .padding(horizontal = 20.dp)
             )
-
+            Spacer(modifier = Modifier.height(20.dp))
+            FilterSection()
+            Spacer(modifier = Modifier.height(8.dp))
             GridLazyColumn(
                 onAddToCart = { product ->
                     cart.value = cart.value + product

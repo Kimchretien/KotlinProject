@@ -37,8 +37,8 @@ fun ProduitCard(
 
     Card(
         modifier = Modifier
-            .width(150.dp)
-            .height(230.dp)
+            .fillMaxWidth()
+            .height(250.dp)
             .padding(5.dp),
 
         shape = RoundedCornerShape(20.dp),
@@ -82,7 +82,7 @@ fun ProduitCard(
                         if(producty.nombre>0){
                             producty.nombre--
                         } else{
-                            onShowMessage("Stock épuisé ❌")
+                            onShowMessage("Stock épuisé")
                             return@IconButton
                         }
                         onAddToCart(producty)
