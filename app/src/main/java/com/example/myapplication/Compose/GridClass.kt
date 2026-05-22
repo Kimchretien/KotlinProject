@@ -16,85 +16,134 @@ import com.example.myapplication.modele.Producty
 
 @Composable
 fun GridPageVertical(
+    selectedFilter: String,
     onAddToCart: (Producty) -> Unit,
     onShowMessage: (String) -> Unit
 ) {
 
+
     val products = listOf(
 
         Producty(
+            "Jordan 19",
             120,
             R.drawable.jordanshoes,
-            1
+            1,
+            "Chaussures"
         ),
 
         Producty(
+            "Samsung phone",
             500,
             R.drawable.smartphone,
-            9
+            9,
+            "Electroniques"
         ),
 
         Producty(
+            "Mac Book",
             900,
             R.drawable.laptop,
-            9
+            9,
+            "Electroniques"
         ),
 
         Producty(
+            "Rolex",
             9000,
             R.drawable.watch,
-            8
+            8,
+            "Accessoires"
         ),
         Producty(
+            "Coffee Maker",
             700,
             R.drawable.coffeemaker,
-            3
+            3,
+            "Accessoires"
         ),
         Producty(
+            "refrigerator",
             6000,
             R.drawable.refrigerator,
-            3
+            3,
+            "Accessoires"
         ),
         Producty(
+            "jordan 19",
             120,
             R.drawable.jordanshoes,
-            3
+            3,
+            "Accessoires"
         ),
 
         Producty(
+            "smartphone",
             500,
             R.drawable.smartphone,
-            4
+            4,
+            "Electroniques"
 
         ),
 
         Producty(
+            "Mac Book",
             900,
             R.drawable.laptop,
-            4
+            4,
+            "Electroniques"
         ),
 
         Producty(
+            "Rolex",
             9000,
             R.drawable.watch,
-            1
+            1,
+            "Accessoires"
         ),
         Producty(
+            "coffeemaker",
             700,
             R.drawable.coffeemaker,
-            1
+            1,
+            "Accessoires"
         ),
         Producty(
+            "refrigerator",
             6000,
             R.drawable.refrigerator,
-            3
+            3,
+            "Accessoires"
+        ),
+        Producty(
+            "T shirt",
+            800,
+            R.drawable.tshirt,
+            6,
+            "vetements"
+        ),
+        Producty(
+            "Manettes",
+            1000,
+            R.drawable.gaming,
+            6,
+            "gaming"
         )
 
 
     )
 
+    val filteredProducts =
+        if (selectedFilter == "Toutes") {
+            products
+        } else {
+            products.filter {
+                it.categorie == selectedFilter
+            }
+        }
+
     Column {
-        products.chunked(2).forEach { rows ->
+        filteredProducts.chunked(2).forEach { rows ->
 
         Row(
                 modifier = Modifier.fillMaxWidth(),

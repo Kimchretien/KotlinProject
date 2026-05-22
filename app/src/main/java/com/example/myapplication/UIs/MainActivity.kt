@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable("home") {
-                    HomePage(navController)
+                    HomePage()
                 }
             }
         }

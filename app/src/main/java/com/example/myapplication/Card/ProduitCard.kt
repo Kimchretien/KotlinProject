@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.modele.Producty
@@ -70,7 +72,12 @@ fun ProduitCard(
                     .fillMaxSize()
                     .padding(12.dp)
             ) {
-
+                Text(
+                    text = producty.name,
+                    modifier = Modifier.align(Alignment.TopStart),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
                 Text(
                     text = "${producty.price} BIF",
                     modifier = Modifier.align(Alignment.BottomStart),
@@ -87,7 +94,7 @@ fun ProduitCard(
                         }
                         onAddToCart(producty)
                     },
-                    modifier = Modifier.align(Alignment.BottomEnd)
+                    modifier = Modifier.align(Alignment.BottomEnd).offset(y = 8.dp)
                 ) {
 
                     Icon(

@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.MoreHoriz
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -59,7 +59,7 @@ fun TextField(){
         )
         IconButton(onClick = { expanded.value= true }) {
             Icon(
-                imageVector = Icons.Default.MoreVert,
+                imageVector = Icons.Default.MoreHoriz,
                 contentDescription = "More Filtres"
             )
         }
@@ -87,8 +87,7 @@ fun menuItem(title: String) {
     DropdownMenuItem(
         text = {
             Text(
-                title,
-                color = if (selectedItem == title) Color(0XFF1C69C0) else Color.Black
+                title
             )
         },
         onClick = {

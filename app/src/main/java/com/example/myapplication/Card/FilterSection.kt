@@ -10,22 +10,24 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.material3.Text
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun FilterSection() {
-    var selectedFilter=remember { mutableStateOf("Chaussures") }
+fun FilterSection(
+    selectedFilter: String,
+    onFilterChange: (String) -> Unit
+) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+
         Row(
             modifier = Modifier
                 .weight(1f)
@@ -36,25 +38,29 @@ fun FilterSection() {
         ) {
 
             Filterchip(
+                name = "Toutes",
+                selected = selectedFilter == "Toutes",
+                onClick = {
+                    onFilterChange("Toutes")
+                }
+            )
+
+            Filterchip(
                 name = "Chaussures",
-                selected = selectedFilter.value== "Chaussures",
-                onClick = { selectedFilter.value= "Chaussures" }
+                selected = selectedFilter == "Chaussures",
+                onClick = {
+                    onFilterChange("Chaussures")
+                }
             )
 
             Filterchip(
-                name = "Vetements",
-                selected = selectedFilter.value== "Vetements",
-                onClick = { selectedFilter.value= "Vetements" }
-            )
-
-            Filterchip(
-                name = "Electronique",
-                selected = selectedFilter.value== "Electronique",
-                onClick = { selectedFilter.value= "Electronique" }
+                name = "vetements",
+                selected = selectedFilter == "vetements",
+                onClick = {
+                    onFilterChange("vetements")
+                }
             )
         }
-
-
     }
 }
 
