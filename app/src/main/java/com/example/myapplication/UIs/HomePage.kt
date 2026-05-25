@@ -41,14 +41,20 @@ import com.example.myapplication.UIs.compose.GridLazyColumn
 import com.example.myapplication.ViewModele.SearchBarWithMenu
 import com.example.myapplication.modele.Producty
 import kotlinx.coroutines.launch
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.example.myapplication.UIs.compose.CartPage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun  HomePage() {
-    val cart = remember {
-        mutableStateOf<List<Producty>>(emptyList())
+    var showCart by remember {
+        mutableStateOf(false)
     }
-    val total = cart.value.sumOf { it.price }
+    var cart by remember {
+        mutableStateOf(listOf<Producty>())
+    }
+    val total = cart.sumOf { it.price }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val selectedFilter = remember {
@@ -65,90 +71,120 @@ fun  HomePage() {
 
         topBar = {
 
-            Box(
-               modifier = Modifier.fillMaxWidth().background(Color(0xFF1C69C0))
-            )
-            {
-                TopAppBar(
-                    title = {
-                        Text("")
-                    },
-                    modifier = Modifier.statusBarsPadding()
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = 20.dp,
-                                topEnd = 20.dp
-                            )
-                        ),
-                    colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color(0xFF1C69C0)
-                    )
-                )
-            }
+           if(!showCart) {
+               Box(
+                   modifier = Modifier.fillMaxWidth().background(Color(0xFF1C69C0))
+               )
+               {
+                   TopAppBar(
+                       title = {
+                           Text("")
+                       },
+                       modifier = Modifier.statusBarsPadding()
+                           .clip(
+                               RoundedCornerShape(
+                                   topStart = 20.dp,
+                                   topEnd = 20.dp
+                               )
+                           ),
+                       colors = TopAppBarDefaults.topAppBarColors(
+                           containerColor = Color(0xFF1C69C0)
+                       )
+                   )
+               }
+           }
         },
 
 
         bottomBar = {
 
-            BottomAppBar(
-                modifier = Modifier.clip(
-                    RoundedCornerShape(
-                        bottomStart = 20.dp,
-                        bottomEnd = 20.dp
-                    )
-                ),
-            ) {
+          if(!showCart) {
+              BottomAppBar(
+                  modifier = Modifier.clip(
+                      RoundedCornerShape(
+                          bottomStart = 20.dp,
+                          bottomEnd = 20.dp
+                      )
+                  ),
+              ) {
 
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                  Row(
+                      modifier = Modifier
+                          .fillMaxWidth()
+                          .padding(horizontal = 16.dp),
+                      verticalAlignment = Alignment.CenterVertically
+                  ) {
 
-                    Text(text = "$total BIF", fontWeight = FontWeight.ExtraBold,
-                        fontFamily = FontFamily.Serif, fontSize = 28.sp)
+                      Text(
+                          text = "$total BIF", fontWeight = FontWeight.ExtraBold,
+                          fontFamily = FontFamily.Serif, fontSize = 28.sp
+                      )
 
-                    Spacer(modifier = Modifier.weight(1f))
+                      Spacer(modifier = Modifier.weight(1f))
 
-                    Button(onClick = { }, colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF1C69C0)
-                    )) {
-                        Icon(
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "cart"
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text("Cart")
-                    }
-                }
-            }
+                      Button(
+                          onClick = {
+                              showCart = true
+                          },
+                          colors = ButtonDefaults.buttonColors(
+                              containerColor = Color(0xFF1C69C0)
+                          )
+                      ) {
+                          Icon(
+                              imageVector = Icons.Default.ShoppingCart,
+                              contentDescription = "cart"
+                          )
+                          Spacer(modifier = Modifier.height(8.dp))
+                          Text("Cart")
+                      }
+                  }
+              }
+          }
         }
     ){ paddingValues ->
 
-        Column(
-            modifier = Modifier.padding(paddingValues).fillMaxSize().padding(horizontal = 8.dp),
+        if (showCart) {
 
+            CartPage(
 
-        ) {
-            Spacer(modifier = Modifier.height(20.dp))
-            SearchBarWithMenu(selectedFilter = selectedFilter.value,
-                onFilterChange = {selectedFilter.value=it})
-            Spacer(modifier = Modifier.height(20.dp))
-            FilterSection(
-                selectedFilter = selectedFilter.value,
-                onFilterChange = {
-                    selectedFilter.value = it
+                cart = cart,
+
+                onRemove = { product ->
+                    cart = cart - product
+                },
+                onBack={
+                    showCart=false
                 }
             )
-            GridLazyColumn(selectedFilter = selectedFilter.value,
-                onAddToCart = { product ->
-                    cart.value = cart.value + product
-                },   onShowMessage = { message ->
-                    showMessage(message)
-                }
-            )
+
+        }else {
+
+            Column(
+                modifier = Modifier.padding(paddingValues).fillMaxSize().padding(horizontal = 8.dp),
+
+
+                ) {
+                Spacer(modifier = Modifier.height(20.dp))
+                SearchBarWithMenu(
+                    selectedFilter = selectedFilter.value,
+                    onFilterChange = { selectedFilter.value = it })
+                Spacer(modifier = Modifier.height(20.dp))
+                FilterSection(
+                    selectedFilter = selectedFilter.value,
+                    onFilterChange = {
+                        selectedFilter.value = it
+                    }
+                )
+                GridLazyColumn(
+                    selectedFilter = selectedFilter.value,
+                    onAddToCart = { product ->
+                        cart = cart + product
+                    }, onShowMessage = { message ->
+                        showMessage(message)
+                    }
+                )
+            }
         }
 
     }

@@ -1,7 +1,6 @@
 package com.example.myapplication.UIs.compose
 
 import androidx.compose.foundation.layout.Arrangement
-
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -17,7 +16,8 @@ fun GridLazyColumn(selectedFilter: String,onAddToCart: (Producty) -> Unit,onShow
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            GridPageVertical(selectedFilter = selectedFilter,onAddToCart = onAddToCart, onShowMessage =onShowMessage )
+            GridPageVertical(selectedFilter = selectedFilter,onAddToCart = onAddToCart,
+                onShowMessage =onShowMessage )
         }
     }
 }
