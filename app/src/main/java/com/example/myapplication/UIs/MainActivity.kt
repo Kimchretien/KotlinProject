@@ -24,11 +24,11 @@ class MainActivity : ComponentActivity() {
             ) {
 
                 composable("home") {
-                    HomePage()
+                    HomePage(navController)
                 }
 
                 composable("login") {
-                    login_page()
+                    login_page(navController)
                 }
             }
         }

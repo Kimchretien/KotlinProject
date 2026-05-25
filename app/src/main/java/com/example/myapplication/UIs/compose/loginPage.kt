@@ -30,14 +30,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun login_page(){
+fun login_page(navController: NavController){
     var email by remember{ mutableStateOf("") }
     var password by remember{ mutableStateOf("") }
     var passwordConfirm by remember { mutableStateOf("") }
     var Is_register by remember { mutableStateOf(false) }
+    var ErrorMessage by remember { mutableStateOf("") }
     Column {
         TopAppBar(
             title = {Text("")},
@@ -66,10 +68,12 @@ fun login_page(){
                         placeholder = {
                             Text("E-mail")
                         },
-                        shape = RoundedCornerShape(160.dp)
+                        shape = RoundedCornerShape(160.dp),
 
 
                     )
+
+
                     Spacer(modifier = Modifier.height(10.dp))
                     OutlinedTextField(
                         value = password,
@@ -80,6 +84,8 @@ fun login_page(){
                         shape = RoundedCornerShape(160.dp)
 
                     )
+
+
                     Spacer(modifier = Modifier.height(10.dp))
                    if(Is_register){
                        OutlinedTextField(
@@ -90,7 +96,9 @@ fun login_page(){
                         },
                         shape = RoundedCornerShape(160.dp)
 
-                    )}
+                    )
+
+                   }
                     Spacer(modifier = Modifier.height(10.dp))
                     Row(
                         modifier = Modifier.width(300.dp),
@@ -98,18 +106,38 @@ fun login_page(){
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Button(
-                            onClick = {},
+                            onClick = {
+                                if(!email.contains("@gmail.com")){
+                                    ErrorMessage="Invalid E-mail"
+
+                                }else if (password.length<6){
+                                    ErrorMessage="Password is too short"
+                                } else if( Is_register && passwordConfirm !=password){
+                                    ErrorMessage ="Password doesn't match"
+                                }
+                                else{
+                                    navController.navigate("home")
+                                }
+                            },
                             shape = RoundedCornerShape(16.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF1C69C0))
                         ) {
-                            Text("Login")
+                            Text(if (Is_register) "Register" else "Login")
 
                         }
                         TextButton(onClick = {
-                            Is_register=true
+                            Is_register=!Is_register
                         }) {
-                            Text("register")
+                            Text(
+                                text = if (!Is_register) "Register" else "Login"
+                            )
 
+                        }
+                        if (ErrorMessage.isNotEmpty()) {
+                            Text(
+                                text = ErrorMessage,
+                                color = Color.Red
+                            )
                         }
                     }
 
