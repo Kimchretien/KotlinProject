@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 val BluePrimary = Color(0xFF2196F3)
 val BlueLight = Color(0xFFBFDFFF)
@@ -30,11 +31,12 @@ val GrayHint = Color(0xFF9E9E9E)
 val GrayBorder = Color(0xFFE0E0E0)
 
 @Composable
-fun LoginScreen(
-) {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var ErrorMessageEmail by remember { mutableStateOf("") }
+    var ErrorMessagePassword by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -42,7 +44,7 @@ fun LoginScreen(
             .background(Color.White)
             .verticalScroll(rememberScrollState())
     ) {
-        // ── Bandeau bleu ──
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -121,6 +123,8 @@ fun LoginScreen(
                     )
                 )
 
+                Text(ErrorMessageEmail, color = Color.Red)
+
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "Mot de passe",
@@ -128,6 +132,7 @@ fun LoginScreen(
                     color = GrayHint
                 )
                 Spacer(modifier = Modifier.height(4.dp))
+
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
@@ -157,6 +162,7 @@ fun LoginScreen(
                         cursorColor = BluePrimary
                     )
                 )
+                Text(ErrorMessagePassword,color= Color.Red)
                 Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
                     Text(
                         text = "Mot de passe oublié ?",
@@ -168,7 +174,26 @@ fun LoginScreen(
                     )
                 }
                 Button(
-                    onClick = {},
+                    onClick = {
+                        if (!email.contains("@gmail.com")){
+                            ErrorMessageEmail="Invalid E-Mail"
+                        }else{
+                            ErrorMessageEmail=""
+                        }
+                        if(password.length<6){
+                            ErrorMessagePassword="Password is too short"
+                        }else{
+                            ErrorMessagePassword=""
+                        }
+
+                        if (
+                            email.contains("@gmail.com") &&
+                            password.length >= 6
+                        ){
+                            navController.navigate("home")
+
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp),

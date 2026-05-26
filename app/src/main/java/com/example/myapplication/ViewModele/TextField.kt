@@ -59,7 +59,7 @@ fun SearchBarWithMenu(
                 .height(55.dp),
             shape = RoundedCornerShape(160000.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color(0XFF1C69C0),
+                focusedBorderColor = Color(0xFF2196F3),
                 unfocusedBorderColor = Color.Gray
             )
         )
@@ -110,7 +110,7 @@ fun MenuItem(
         text = {
             Text(
                 title,
-                color = if (selectedFilter == title) Color(0xFF1C69C0)
+                color = if (selectedFilter == title) Color(0xFF2196F3)
                 else Color.Black
             )
         },

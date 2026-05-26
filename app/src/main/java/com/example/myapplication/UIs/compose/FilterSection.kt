@@ -75,7 +75,7 @@ fun Filterchip(
         onClick = onClick,
         label = { Text(name) },
         colors = FilterChipDefaults.filterChipColors(
-            selectedContainerColor = Color(0XFF1C69C0),
+            selectedContainerColor = Color(0xFF2196F3),
             selectedLabelColor = Color.White,
             containerColor = Color.Transparent,
             labelColor = Color.Black

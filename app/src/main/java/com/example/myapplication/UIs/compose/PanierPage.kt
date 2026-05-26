@@ -54,7 +54,7 @@ fun CartPage(
                     Text("Panier")
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF1C69C0)
+                    containerColor = Color(0xFF2196F3)
                 ),
 
                 navigationIcon = {
@@ -97,7 +97,7 @@ fun CartPage(
                         onClick = {
                         },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF1C69C0)
+                            containerColor = Color(0xFF2196F3)
                         )
                     ){
                         Icon(

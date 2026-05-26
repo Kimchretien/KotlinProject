@@ -76,7 +76,7 @@ fun  HomePage(navController: NavController) {
 
            if(!showCart) {
                Box(
-                   modifier = Modifier.fillMaxWidth().background(Color(0xFF1C69C0))
+                   modifier = Modifier.fillMaxWidth().background(Color(0xFF2196F3))
                )
                {
                    TopAppBar(
@@ -98,7 +98,7 @@ fun  HomePage(navController: NavController) {
                                )
                            ),
                        colors = TopAppBarDefaults.topAppBarColors(
-                           containerColor = Color(0xFF1C69C0)
+                           containerColor = Color(0xFF2196F3)
                        )
                    )
                }
@@ -138,7 +138,7 @@ fun  HomePage(navController: NavController) {
                               showCart = true
                           },
                           colors = ButtonDefaults.buttonColors(
-                              containerColor = Color(0xFF1C69C0)
+                              containerColor = Color(0xFF2196F3)
                           )
                       ) {
                           Icon(
