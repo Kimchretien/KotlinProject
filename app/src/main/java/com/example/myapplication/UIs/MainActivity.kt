@@ -8,7 +8,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.UIs.compose.login_page
+import com.example.maboutique.ui.screens.LoginScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
 
             NavHost(
                 navController = navController,
-                startDestination = "home"
+                startDestination = "login"
             ) {
 
                 composable("home") {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 composable("login") {
-                    login_page(navController)
+                    LoginScreen()
                 }
             }
         }
