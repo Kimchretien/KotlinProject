@@ -85,7 +85,6 @@ fun login_page(navController: NavController){
 
                     )
 
-
                     Spacer(modifier = Modifier.height(10.dp))
                    if(Is_register){
                        OutlinedTextField(
@@ -95,7 +94,6 @@ fun login_page(navController: NavController){
                             Text("Confirm password")
                         },
                         shape = RoundedCornerShape(160.dp)
-
                     )
 
                    }
@@ -131,7 +129,6 @@ fun login_page(navController: NavController){
                             Text(
                                 text = if (!Is_register) "Register" else "Login"
                             )
-
                         }
                         if (ErrorMessage.isNotEmpty()) {
                             Text(
@@ -140,11 +137,8 @@ fun login_page(navController: NavController){
                             )
                         }
                     }
-
                 }
             }
-
         }
     }
-
 }

@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
             NavHost(
                 navController = navController,
-                startDestination = "login"
+                startDestination = "home"
             ) {
 
                 composable("home") {

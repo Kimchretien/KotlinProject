@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
@@ -87,7 +87,7 @@ fun  HomePage(navController: NavController) {
                            IconButton(onClick = {
                                navController.popBackStack()
                            }) {
-                               Icon(Icons.Default.Logout, contentDescription = "Deconnexion")
+                               Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = "Deconnexion")
                            }
                        },
                        modifier = Modifier.statusBarsPadding()
@@ -198,8 +198,4 @@ fun  HomePage(navController: NavController) {
         }
 
     }
-
-
-
-
 }
